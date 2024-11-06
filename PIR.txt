@@ -1,0 +1,155 @@
+int pirPin = 2; 
+int ledPin = 13; 
+int buzzerPin = 12; 
+
+void setup() {
+  pinMode(pirPin, INPUT); 
+  pinMode(ledPin, OUTPUT); 
+  pinMode(buzzerPin, OUTPUT); 
+  Serial.begin(9600); 
+}
+
+void loop() {
+  int pirState = digitalRead(pirPin); 
+
+  if (pirState == HIGH) {
+    digitalWrite(ledPin, HIGH); 
+    digitalWrite(buzzerPin, HIGH); 
+    Serial.println("Motion detected!"); 
+  } else {
+    digitalWrite(ledPin, LOW); 
+    digitalWrite(buzzerPin, LOW); 
+    Serial.println("No motion."); 
+  }
+
+  delay(1000); 
+}
+
+
+
+-------------------------------------------------------------------
+
+
+
+
+const int pirPin = 2;    
+const int ledPin = 13;  
+const int buzzerPin = 8; 
+
+bool motionTriggered = false; 
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(pirPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  pinMode(buzzerPin, OUTPUT);
+  digitalWrite(ledPin, LOW); 
+  noTone(buzzerPin);          
+  Serial.println("PIR Sensor Setup Complete. Waiting for motion...");
+}
+
+void loop() {
+  int motionDetected = digitalRead(pirPin);
+
+  if (motionDetected == HIGH && !motionTriggered) {
+    Serial.println("Motion Detected!");
+    digitalWrite(ledPin, HIGH);   
+    tone(buzzerPin, 1000);         
+    delay(1000);                   
+    noTone(buzzerPin);            
+    motionTriggered = true;        
+  } else if (motionDetected == LOW) {
+    // Reset only if the buzzer and LED are off
+    if (motionTriggered) {
+      digitalWrite(ledPin, LOW);  
+      motionTriggered = false;      
+    }
+  }
+  
+  delay(100); 
+}
+
+
+
+
+--------------------------------------------------------------------
+
+
+int pirPin = 2; // PIR sensor output pin
+int ledPin = 13; // LED pin
+int buzzerPin = 12; // Buzzer pin
+
+void setup() {
+  pinMode(pirPin, INPUT); // Set PIR sensor pin as input
+  pinMode(ledPin, OUTPUT); // Set LED pin as output
+  pinMode(buzzerPin, OUTPUT); // Set buzzer pin as output
+  Serial.begin(9600); // Initialize serial communication for debugging
+}
+
+void loop() {
+  int pirState = digitalRead(pirPin); // Read PIR sensor state
+
+  if (pirState == HIGH) {
+    digitalWrite(ledPin, HIGH); // Turn on LED
+    digitalWrite(buzzerPin, HIGH); // Turn on buzzer
+    Serial.println("Motion detected!"); // Print message to serial monitor
+  } else {
+    digitalWrite(ledPin, LOW); // Turn off LED
+    digitalWrite(buzzerPin, LOW); // Turn off buzzer
+    Serial.println("No motion."); // Print message to serial monitor
+  }
+
+  delay(1000); // Wait for a second before checking again
+}
+
+
+
+--------------------------------------------------------------
+
+
+
+const int pirPin = 2;    // PIR sensor output pin
+const int ledPin = 13;   // LED pin
+const int buzzerPin = 8; // Buzzer pin
+
+bool motionTriggered = false; // Flag to track motion detection
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(pirPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  pinMode(buzzerPin, OUTPUT);
+  digitalWrite(ledPin, LOW); // Ensure LED is off at start
+  noTone(buzzerPin);          // Ensure buzzer is off at start
+  Serial.println("PIR Sensor Setup Complete. Waiting for motion...");
+}
+
+void loop() {
+  int motionDetected = digitalRead(pirPin);
+
+  if (motionDetected == HIGH && !motionTriggered) {
+    Serial.println("Motion Detected!");
+    digitalWrite(ledPin, HIGH);   // Turn on LED
+    tone(buzzerPin, 1000);         // Sound buzzer at 1000 Hz
+    delay(1000);                   // Keep buzzer on for 1 second
+    noTone(buzzerPin);             // Turn off buzzer
+    motionTriggered = true;        // Set flag to indicate motion has been triggered
+  } else if (motionDetected == LOW) {
+    // Reset only if the buzzer and LED are off
+    if (motionTriggered) {
+      digitalWrite(ledPin, LOW);   // Turn off LED
+      motionTriggered = false;      // Reset the flag to allow new detection
+    }
+  }
+  
+  delay(100); // Short delay for stability
+}
+
+
+
+
+
+
+
+
+
